@@ -10,7 +10,7 @@ jobs:
 
     services:
       docker:
-        memory: 2G
+#        memory: 2G
         options: --privileged
 
     steps:
