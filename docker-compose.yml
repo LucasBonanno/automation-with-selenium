@@ -1,0 +1,14 @@
+version: "3"
+services:
+  selenium-hub:
+    image: selenium/hub:4.1.2-20220104
+    ports:
+      - "4444:4444"
+  chrome:
+    image: selenium/node-chrome:4.1.2-20220104
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+    volumes:
+      - /dev/shm:/dev/shm

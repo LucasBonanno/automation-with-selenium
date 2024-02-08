@@ -1,0 +1,26 @@
+name: Selenium Tests
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        memory: 2G
+        options: --privileged
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up environment for Grid
+        run: echo "USE_GRID=true" >> $GITHUB_ENV
+      - name: Start Selenium Grid
+        run: docker-compose -f docker-compose.yml up -d
+      - name: Build with Maven
+        run: mvn clean verify
+      - name: Stop Selenium Grid
+        run: docker-compose -f docker-compose.yml down
