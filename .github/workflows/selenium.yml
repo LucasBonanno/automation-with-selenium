@@ -7,6 +7,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      USE_GRID: true
     services:
       docker:
         image: docker:latest
@@ -18,7 +20,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - name: Set up environment for Grid
-        run: echo "USE_GRID=true" >> $GITHUB_ENV
+        run: echo "USE_GRID=$USE_GRID" >> $GITHUB_ENV
       - name: Start Selenium Grid
         run: docker-compose -f docker-compose.yml up -d
       - name: Build & Install
