@@ -31,7 +31,7 @@ public class ChromeTest {
 
     private void setupRemoteDriver() {
         driver = WebDriverManager.chromedriver()
-                .remoteAddress( "http://localhost:4445/wd/hub" ).create();
+                .remoteAddress( "http://localhost:4444/wd/hub" ).create();
     }
 
 
