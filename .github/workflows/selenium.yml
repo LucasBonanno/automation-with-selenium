@@ -20,7 +20,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - name: Set up environment for Grid
-        run: echo "USE_GRID=$USE_GRID" >> $GITHUB_ENV
+        run: export USE_GRID=true
+      - name: Check Export Variable
+        run: env | grep -i USE_GRID
       - name: Start Selenium Grid
         run: docker-compose -f docker-compose.yml up -d
       - name: Build & Install
