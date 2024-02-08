@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.Objects;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ChromeTest {
@@ -15,9 +17,12 @@ public class ChromeTest {
 
     @BeforeEach
     void setupTest() {
-        String useGrid = System.getProperty( "USE_GRID", "false" );
 
-        if( useGrid.equals( "true" ) ) {
+        String getenv = System.getenv( "USE_GRID" );
+
+        System.out.println( "ENV: " + getenv );
+
+        if( Objects.nonNull( getenv ) && getenv.equals( "true" ) ) {
             setupRemoteDriver();
         } else {
             setupLocalDriver();
